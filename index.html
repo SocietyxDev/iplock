@@ -5,33 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roblox Cookie IP Lock Bypass</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
-        input, button { margin: 10px; padding: 10px; width: 300px; }
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            margin: 20px; 
+            background: #f9f9f9;
+        }
+        h2 {
+            font-size: 22px;
+        }
+        input, button {
+            width: 90%; 
+            max-width: 400px;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
         #newCookie {
             background: #f0f0f0;
             border: 1px solid #ccc;
-            padding: 10px;
-            width: 80%;
-            max-width: 600px;
+            padding: 12px;
+            width: 90%;
+            max-width: 400px;
             word-wrap: break-word;
             overflow-wrap: break-word;
             white-space: pre-wrap;
-            display: inline-block;
+            margin: 10px auto;
             text-align: left;
+            border-radius: 5px;
         }
         /* Popup styles */
         .popup {
             display: none;
             position: fixed;
-            top: 20px;
+            top: 10%;
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0, 0, 0, 0.8);
             color: white;
-            padding: 10px 20px;
+            padding: 12px 18px;
             border-radius: 8px;
             font-size: 14px;
             z-index: 1000;
+            width: 80%;
+            max-width: 300px;
+            text-align: center;
             animation: fadeInOut 2s forwards;
         }
         @keyframes fadeInOut {
