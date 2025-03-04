@@ -4,7 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roblox Cookie IP Lock Bypass</title>
-    <link rel="stylesheet" href="public/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            margin-top: 100px;
+        }
+
+        input {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #newCookie {
+            font-size: 18px;
+            font-weight: bold;
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -14,6 +54,35 @@
         <h3>New Cookie:</h3>
         <div id="newCookie">Waiting...</div>
     </div>
-    <script src="public/script.js"></script>
+
+    <script>
+        function generateCookie() {
+            const cookie = document.getElementById("cookieInput").value;
+
+            if (!cookie) {
+                alert("Please enter a valid Roblox cookie.");
+                return;
+            }
+
+            document.getElementById("newCookie").innerText = "Generating...";
+
+            fetch("/generate-cookie", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ cookie })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById("newCookie").innerText = `New Cookie: ${data.newCookie}`;
+                } else {
+                    document.getElementById("newCookie").innerText = "⚠️ Failed to refresh cookie. Try later.";
+                }
+            })
+            .catch(() => {
+                document.getElementById("newCookie").innerText = "⚠️ Error: Server is not responding.";
+            });
+        }
+    </script>
 </body>
 </html>
