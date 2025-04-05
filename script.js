@@ -1,7 +1,7 @@
 // Discord OAuth Configuration
 const DISCORD_CLIENT_ID = "1355364009876127863";
 const DISCORD_REDIRECT_URI = window.location.href.includes('localhost') ? 
-    "http://localhost:8000" : "https://homepage-nu-beige.vercel.app/";
+    "http://localhost:8000" : "https://iplock-three.vercel.app/";
 const DISCORD_SCOPES = ["identify"];
 
 // DOM Elements
