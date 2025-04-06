@@ -117,7 +117,7 @@
                     <div class="profile-dropdown">
                         <img src="" alt="User Avatar" class="user-avatar" id="userAvatar">
                         <div class="profile-menu" id="profileMenu">
-                            <a href="#"><i class="fas fa-user"></i> Profile</a>
+                            <a href="#" id="profileLink"><i class="fas fa-user"></i> Profile</a>
                             <a href="#" class="logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
                         </div>
                     </div>
@@ -130,6 +130,39 @@
                 <p>This is your dark glass-themed dashboard with red accents.</p>
             </div>
         </main>
+    </div>
+
+    <!-- Profile Modal -->
+    <div class="profile-modal" id="profileModal">
+        <div class="profile-modal-content">
+            <div class="profile-modal-header">
+                <h2>Profile Settings</h2>
+                <button class="profile-modal-close" id="profileModalClose">&times;</button>
+            </div>
+            <div class="profile-modal-body">
+                <div class="profile-avatar-section">
+                    <div class="avatar-preview" id="avatarPreview">
+                        <img src="" alt="Current Avatar" id="currentAvatar">
+                    </div>
+                    <div class="avatar-upload">
+                        <label for="avatarUpload">Change Avatar:</label>
+                        <input type="file" id="avatarUpload" accept="image/*">
+                    </div>
+                </div>
+                <div class="profile-form-group">
+                    <label for="nickname">Nickname:</label>
+                    <input type="text" id="nickname" placeholder="Enter your nickname">
+                </div>
+                <div class="profile-form-group">
+                    <label for="discordWebhook">Discord Webhook URL:</label>
+                    <input type="text" id="discordWebhook" placeholder="https://discord.com/api/webhooks/...">
+                    <small>For website announcements on your Discord server</small>
+                </div>
+            </div>
+            <div class="profile-modal-footer">
+                <button class="profile-save-btn" id="profileSaveBtn">Save Changes</button>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
